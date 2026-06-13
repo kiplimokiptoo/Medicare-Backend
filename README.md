@@ -54,3 +54,4 @@ Response:
 
 - FastAPI login endpoint added
 - Unit tests for login endpoint
+- Dockerfile included for backend
