@@ -51,3 +51,5 @@ Response:
   "token": "fake-jwt-token"
 }
 ```
+
+- FastAPI login endpoint added
