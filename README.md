@@ -1,4 +1,3 @@
-
 # Backend (FastAPI)
 
 Run locally:
@@ -39,4 +38,3 @@ pytest --cov=app --cov-report=term-missing
 # Backend
 
 This folder will contain backend code (APIs, database, etc.).
-
