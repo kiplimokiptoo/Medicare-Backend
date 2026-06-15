@@ -1,40 +1,134 @@
-# Backend (FastAPI)
+# Medicare App Backend
 
-Run locally:
+FastAPI backend for the Medicare appointment and doctor management system.
+
+## Features
+
+- **FastAPI** - High-performance async Python web framework
+- **SQLAlchemy ORM** - Database abstraction and model management
+- **CORS Support** - Configured for frontend integration
+- **API Documentation** - Auto-generated with Swagger UI and ReDoc
+- **Comprehensive API Endpoints** - Appointments, Doctors, and Patient management
+
+## Quick Start
+
+### Prerequisites
+- Python 3.11+
+- pip
+
+### Local Development
+
+1. **Create virtual environment:**
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Run the server:**
+   ```bash
+   uvicorn app.main:app --reload --port 8000
+   ```
+
+4. **Access API documentation:**
+   - Swagger UI: http://localhost:8000/docs
+   - ReDoc: http://localhost:8000/redoc
+
+## Docker
+
+### Build and run with Docker:
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-uvicorn app.main:app --reload --app-dir app
+docker build -t medicare-backend .
+docker run -p 8000:8000 medicare-backend
 ```
 
-API docs available at `http://localhost:8000/docs` when running.
-
-Tests & coverage:
+### Using Docker Compose:
 
 ```bash
-pip install -r requirements.txt
-pytest --maxfail=1 -q
+docker-compose up backend
 ```
 
-# Backend
+## API Endpoints
 
-FastAPI backend for the Medicare App.
+### Doctors
+- `GET /api/v1/doctors` - List all doctors
+- `POST /api/v1/doctors` - Create a new doctor
+- `GET /api/v1/doctors/{id}` - Get doctor details
 
-Quick start:
+### Appointments
+- `GET /api/v1/appointments` - List all appointments
+- `POST /api/v1/appointments` - Book an appointment
+- `GET /api/v1/appointments/{id}` - Get appointment details
 
-1. Create a virtualenv: `python -m venv .venv` then `source .venv/bin/activate`.
-2. Install dependencies: `pip install -r requirements.txt`.
-3. Run the app: `uvicorn app.main:app --reload --port 8000`.
-4. Open docs at `http://localhost:8000/docs` or `http://localhost:8000/redoc`.
+### Info
+- `GET /api/v1/info` - Get app information and available departments
 
-Run tests and coverage:
+## Testing
 
+### Run tests:
+```bash
+pytest
 ```
-pytest --maxfail=1 --disable-warnings -q
+
+### Run tests with coverage:
+```bash
 pytest --cov=app --cov-report=term-missing
 ```
-# Backend
 
-This folder will contain backend code (APIs, database, etc.).
+### Current Coverage
+- Target: 10% test coverage
+- Status: In progress
+
+## Configuration
+
+Environment variables can be set in `.env` file:
+
+```bash
+PYTHONUNBUFFERED=1
+DATABASE_URL=sqlite:///./test.db
+```
+
+## Project Structure
+
+```
+backend/
+├── app/
+│   ├── main.py           # FastAPI application entry point
+│   ├── database.py       # Database configuration
+│   ├── models.py         # SQLAlchemy models
+│   ├── schemas.py        # Pydantic schemas for validation
+│   └── routers/
+│       ├── doctors.py    # Doctor endpoints
+│       ├── appointments.py # Appointment endpoints
+│       └── patients.py   # Patient endpoints
+├── tests/                # Test suite
+├── requirements.txt      # Python dependencies
+├── Dockerfile           # Docker configuration
+└── README.md
+```
+
+## Development Workflow
+
+1. Create feature branches for new features
+2. Implement endpoints with proper documentation
+3. Add tests for new functionality
+4. Update API schemas and models as needed
+5. Submit pull request for review
+6. Merge to main after approval
+
+## Deployment
+
+Both frontend and backend are containerized for easy deployment to Docker Hub.
+
+### Build Docker image:
+```bash
+docker build -t <dockerhub-username>/medicare-backend:<version> .
+docker push <dockerhub-username>/medicare-backend:<version>
+```
+
+See the main README for deployment instructions.
